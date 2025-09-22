@@ -13,29 +13,50 @@
   <property name="windowTitle">
    <string>Widget</string>
   </property>
-  <widget class="QSpinBox" name="spinBox">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>160</y>
-     <width>42</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QSlider" name="horizontalSlider">
-   <property name="geometry">
-    <rect>
-     <x>390</x>
-     <y>160</y>
-     <width>160</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Orientation::Horizontal</enum>
-   </property>
-  </widget>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QSlider" name="horizontalSlider">
+     <property name="minimum">
+      <number>-100</number>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QSpinBox" name="spinBox">
+     <property name="minimum">
+      <number>-100</number>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLCDNumber" name="lcdNumber">
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="lineWidth">
+      <number>3</number>
+     </property>
+     <property name="smallDecimalPoint">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections>
@@ -52,6 +73,38 @@
     <hint type="destinationlabel">
      <x>462</x>
      <y>170</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>spinBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>525</x>
+     <y>181</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>121</x>
+     <y>173</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>lcdNumber</receiver>
+   <slot>display(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>106</x>
+     <y>173</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>297</x>
+     <y>254</y>
     </hint>
    </hints>
   </connection>
